@@ -10,8 +10,8 @@ module Prawn
       module PrawnTextPatch
         def original_text
           super.map do |h|
-            if h.key?(:text)
-              h[:text] = Prawn::Rtl::Connector.connect(h[:text])
+            if Prawn::Rtl::Connector.include_arabic?(h[:text])
+              h[:text] = Prawn::Rtl::Connector.connect_arabic(h[:text])
             end
             h
           end
@@ -28,10 +28,10 @@ module Prawn
     module Support
       module PrawnArrangerPatch
         def finalize_line
-          if @consumed.none? { |h| Prawn::Rtl::Connector.include_rtl?(h[:text]) }
-            super
-          else
+          if @consumed.any? { |h| Prawn::Rtl::Connector.include_rtl?(h[:text]) }
             finalize_line_with_rtl
+          else
+            super
           end
         end
 

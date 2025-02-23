@@ -12,11 +12,15 @@ module Prawn
       # Arabic (0600-06FF), Hebrew (0590-05FF), Syriac (0700-074F),
       # Arabic Supplement (0750-077F), Thaana (0780-07BF),
       # NKo (07C0-07FF), Samaritan (0800-083F), Mandaic (0840-085F),
-      # and other extended RTL characters.
-      RTL_REGEX = /[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]/
+      # other extended RTL characters, and Bidi control characters.
+      RTL_REGEX = /[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF\u200F\u202A-\u202E\u2066-\u2069]/
 
       def include_rtl?(string)
         string&.match?(RTL_REGEX)
+      end
+
+      def include_arabic?(string)
+        string&.match?(/\p{Arabic}/)
       end
 
       # Slow version
@@ -27,8 +31,7 @@ module Prawn
                                  .include?(:R)
       end
 
-      def connect(string)
-        return string unless include_rtl?(string)
+      def connect_arabic(string)
         Prawn::Rtl::Connector::Logic.transform(string)
       end
 
@@ -101,7 +104,7 @@ module Prawn
         end
 
         # Remove trailing whitespace from the last string
-        array[-1] = array.last.rstrip if !array.empty?
+        array[-1] = array.last.rstrip
 
         array
       end
