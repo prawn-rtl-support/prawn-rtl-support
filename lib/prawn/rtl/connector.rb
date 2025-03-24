@@ -104,7 +104,7 @@ module Prawn
         end
 
         # Remove trailing whitespace from the last string
-        array[-1] = array.last.rstrip
+        array[-1] = array.last.rstrip if !array.empty?
 
         array
       end
