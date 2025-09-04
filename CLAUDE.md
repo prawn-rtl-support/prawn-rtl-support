@@ -53,5 +53,4 @@ The gem automatically activates when required - no configuration needed. It dete
 
 ## Contributing
 
-- Use Conventional Commits for commit messages.
-- Run tests `bundle exec rake` and rubocop linting `bundle exec rubocop` before committing.
+- Run tests `bundle exec rake` and RuboCop linting `bundle exec rubocop` before committing.
