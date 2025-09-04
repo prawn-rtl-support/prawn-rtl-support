@@ -10,9 +10,7 @@ module Prawn
       module PrawnTextPatch
         def original_text
           super.map do |h|
-            if h.key?(:text)
-              h[:text] = Prawn::Rtl::Connector.fix_rtl(h[:text])
-            end
+            h[:text] = Prawn::Rtl::Connector.fix_rtl(h[:text]) if h.key?(:text)
             h
           end
         end

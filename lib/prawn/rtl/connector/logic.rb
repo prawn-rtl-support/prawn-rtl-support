@@ -4,7 +4,6 @@ module Prawn
   module Rtl
     module Connector
       module Logic
-
         @@charinfos = nil
 
         class CharacterInfo
@@ -16,7 +15,7 @@ module Prawn
               isolated: isolated,
               final: final,
               initial: initial,
-              medial: medial,
+              medial: medial
             }
             @connects = connects
             @diacritic = diacritic
@@ -29,7 +28,6 @@ module Prawn
           def diacritic?
             @diacritic
           end
-
         end
 
         # Determine the form of the current character (:isolated, :initial, :medial,
@@ -43,8 +41,8 @@ module Prawn
           previous_char = previous_previous_char if charinfos[previous_char] && charinfos[previous_char].diacritic?
           if charinfos[previous_char] && charinfos[next_char]
             charinfos[previous_char].connects? ? :medial : :initial # If the current character does not connect,
-                                                                    # its medial form will map to its final form,
-                                                                    # and its initial form will map to its isolated form.
+          # its medial form will map to its final form,
+          # and its initial form will map to its isolated form.
           elsif charinfos[previous_char] # The next character is not an arabic character.
             charinfos[previous_char].connects? ? :final : :isolated
           elsif charinfos[next_char] # The previous character is not an arabic character.
@@ -69,6 +67,7 @@ module Prawn
             next_char = next_next_char
             next_next_char = char
             return unless current_char
+
             if charinfos.keys.include?(current_char)
               form = determine_form(previous_previous_char, previous_char, next_char, next_next_char)
               res += charinfos[current_char].formatted[form]
@@ -78,13 +77,14 @@ module Prawn
           end
           str.each_char { |char| consume_character.call(char) }
           2.times { consume_character.call(nil) }
-          return res
+          res
         end
 
         private
 
         def self.charinfos
           return @@charinfos unless @@charinfos.nil?
+
           @@charinfos = {}
           add('0627', 'fe8d', 'fe8e', 'fe8d', 'fe8e', false) # Alef
           add('0628', 'fe8f', 'fe90', 'fe91', 'fe92', true)  # Ba2
@@ -147,7 +147,6 @@ module Prawn
           )
           @@charinfos[charinfo.common] = charinfo
         end
-
       end
     end
   end
