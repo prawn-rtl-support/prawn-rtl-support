@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 This is prawn-rtl-support, a Ruby gem that provides bidirectional text (RTL/LTR) support for the Prawn PDF generation library. It enables proper rendering of Arabic and other right-to-left languages in PDFs by:
-- Using Unicode Bidirectional Algorithm via TwitterCldr for text reordering
+- Using Unicode Bidirectional Algorithm via ICU (ffi-icu) for text reordering
 - Connecting Arabic letters properly for visual display
 - Minimally patching Prawn's text rendering pipeline
 
@@ -41,15 +41,16 @@ The gem patches Prawn by prepending a module to `Prawn::Text::Formatted::Box#ori
 2. **lib/prawn/rtl/connector.rb**: Core RTL fixing logic with three main methods:
    - `fix_rtl(string)`: Main public API that detects RTL text and processes it
    - `connect(string)`: Applies Arabic letter connection rules
-   - `reorder(string)`: Uses TwitterCldr's Bidi algorithm to reorder text visually
+   - `reorder(string)`: Uses ICU's Bidi algorithm to reorder text visually
 3. **lib/prawn/rtl/connector/logic.rb**: Arabic letter connection logic with character mapping tables for different forms (isolated, initial, medial, final)
 
 The gem automatically activates when required - no configuration needed. It detects RTL text and only processes strings that contain RTL characters.
 
 ## Key Dependencies
 
-- **prawn ~> 2.2**: The PDF generation library being patched
-- **twitter_cldr >= 4.0, < 7.0**: Provides Unicode Bidirectional Algorithm implementation
+- **prawn ~> 2.2**: The PDF generation library being patched  
+- **ffi ~> 1.15**: Foreign Function Interface for Ruby to call ICU C library functions
+- **ICU library**: System dependency (libicuuc) providing Unicode Bidirectional Algorithm implementation
 
 ## Contributing
 

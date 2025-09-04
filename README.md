@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/prawn-rtl-support/prawn-rtl-support/actions/workflows/ci.yml/badge.svg)](https://github.com/prawn-rtl-support/prawn-rtl-support/actions/workflows/ci.yml)
 
-This gem provides bidirectional text support for Prawn PDF generator. It uses the Unicode Bidirectional Algorithm from [TwitterCldr::Shared::Bidi](https://github.com/twitter/twitter-cldr-rb) for text reordering and implements Arabic letter shaping similar to [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector). Prawn patching is minimal - we only patch [`Prawn::Text::Formatted::Box#original_text`](https://github.com/prawnpdf/prawn/blob/master/lib/prawn/text/formatted/box.rb#L367).
+This gem provides bidirectional text support for Prawn PDF generator. It uses the Unicode Bidirectional Algorithm via [ICU](http://site.icu-project.org/) (International Components for Unicode) for text reordering and implements Arabic letter shaping similar to [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector). Prawn patching is minimal - we only patch [`Prawn::Text::Formatted::Box#original_text`](https://github.com/prawnpdf/prawn/blob/master/lib/prawn/text/formatted/box.rb#L367).
 
 ## Supported Languages
 

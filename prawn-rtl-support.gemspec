@@ -37,6 +37,6 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = ['README.md', 'LICENSE.txt']
 
   # Runtime dependencies
+  spec.add_dependency 'ffi', '~> 1.17'
   spec.add_dependency 'prawn', '~> 2.2'
-  spec.add_dependency 'twitter_cldr', '>= 4.0', '< 7.0'
 end
