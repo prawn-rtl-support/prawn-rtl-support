@@ -22,6 +22,33 @@ This gem provides bidirectional text support for Prawn PDF generator. It uses th
 
 Ruby and Rails internally provide Unicode string normalization. However, Prawn doesn't connect Arabic letters into their contextual forms and doesn't support mixed LTR and RTL strings. This gem adds this support. 
 
+## Requirements
+
+### ICU Library
+
+Starting from version 0.2.0, this gem requires the ICU library to be installed on your system:
+
+- **Linux**: Usually pre-installed. If not, install with:
+  ```bash
+  # Ubuntu/Debian
+  sudo apt-get install libicu-dev
+  
+  # RHEL/CentOS/Fedora
+  sudo yum install libicu-devel
+  ```
+
+- **macOS**: Install via Homebrew:
+  ```bash
+  brew install icu4c
+  ```
+
+- **Windows**: Download and install ICU from the [official site](http://site.icu-project.org/download)
+
+- **Custom installation path**: If ICU is installed in a non-standard location, set the `ICU_LIB_PATH` environment variable:
+  ```bash
+  export ICU_LIB_PATH=/custom/path/to/icu/lib
+  ```
+
 ## Installation
 
 Add this line to your application's Gemfile:

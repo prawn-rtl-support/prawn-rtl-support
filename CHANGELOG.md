@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2025-09-04
+
+### ⚠️ Breaking Changes
+- **ICU library requirement**: The gem now requires the ICU library to be installed on the system. This may affect macOS and Windows users who previously relied on twitter_cldr's bundled ICU data.
+  - **Linux**: Usually pre-installed
+  - **macOS**: Install via Homebrew: `brew install icu4c`
+  - **Windows**: May require manual ICU installation
+  - **Custom path**: Set `ICU_LIB_PATH` environment variable if ICU is installed in a non-standard location
+
+### Customer-Impacting Changes
+
+#### Added
+- **Extended platform support**: Added ARM64 architecture support in CI/CD pipeline
+
+#### Changed
+- **Dependencies**: Replaced twitter_cldr with direct FFI bindings (lighter dependency footprint, but requires system ICU library)
+- **Performance**: Direct ICU integration provides better performance for text processing
+
+### Internal Changes
+
+#### Testing & Quality
+- Added comprehensive integration tests for BiDi functionality
+- Extended CI matrix to include Ubuntu 22.04, 24.04 and ARM64 variants
+
 ## [0.1.8] - 2025-09-04
 
 ### Customer-Impacting Changes

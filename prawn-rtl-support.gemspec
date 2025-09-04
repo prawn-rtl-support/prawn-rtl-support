@@ -5,8 +5,8 @@ require_relative 'lib/prawn/rtl/support/version'
 Gem::Specification.new do |spec|
   spec.name          = 'prawn-rtl-support'
   spec.version       = Prawn::Rtl::Support::VERSION
-  spec.authors       = ['Oleksandr Lapchenko']
-  spec.email         = ['ozeron@me.com']
+  spec.authors       = ['Oleksandr Lapchenko', 'Oleksii Leonov']
+  spec.email         = ['ozeron@me.com', 'mail@oleksiileonov.com']
 
   spec.summary       = 'Bidirectional text support for Prawn PDF generator'
   spec.description   = 'Adds right-to-left (RTL) text support to Prawn PDF generator. ' \
@@ -26,10 +26,11 @@ Gem::Specification.new do |spec|
   }
 
   # Specify which files should be included in the gem
-  spec.files = (Dir['{lib,exe}/**/*'] +
-                Dir['*.{md,txt,gemspec}'] +
-                %w[Gemfile Rakefile LICENSE.txt README.md CODE_OF_CONDUCT.md].select { |f| File.exist?(f) })
-               .reject { |f| File.directory?(f) }
+  spec.files = (
+    Dir['{lib,exe}/**/*'] +
+    Dir['*.{md,txt,gemspec}'] +
+    %w[Gemfile LICENSE.txt README.md CODE_OF_CONDUCT.md].select { |f| File.exist?(f) }
+  ).reject { |f| File.directory?(f) }
 
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }

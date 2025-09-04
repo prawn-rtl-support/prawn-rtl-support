@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project Overview
 
 This is prawn-rtl-support, a Ruby gem that provides bidirectional text (RTL/LTR) support for the Prawn PDF generation library. It enables proper rendering of Arabic and other right-to-left languages in PDFs by:
-- Using Unicode Bidirectional Algorithm via ICU (ffi-icu) for text reordering
+- Using Unicode Bidirectional Algorithm via ICU for text reordering
 - Connecting Arabic letters properly for visual display
 - Minimally patching Prawn's text rendering pipeline
 
