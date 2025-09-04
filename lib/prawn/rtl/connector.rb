@@ -12,6 +12,7 @@ module Prawn
 
       def self.fix_rtl(string)
         return string unless include_rtl?(string)
+
         reorder(connect(string))
       end
 
