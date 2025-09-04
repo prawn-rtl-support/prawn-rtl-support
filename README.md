@@ -43,7 +43,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 Bug reports and pull requests are welcome on GitHub at https://github.com/prawn-rtl-support/prawn-rtl-support. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Acknowledgment
-This gem use same code as [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector) by [@staii](https://github.com/staii) and therefore based on [Arabic-Prawn](https://rubygems.org/gems/Arabic-Prawn/versions/0.0.1) by Dynamix Solutions (Ahmed Nasser).
+This gem uses the same code as [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector) by [@staii](https://github.com/staii) and therefore is based on [Arabic-Prawn](https://rubygems.org/gems/Arabic-Prawn/versions/0.0.1) by Dynamix Solutions (Ahmed Nasser).
 
 ## License
 
