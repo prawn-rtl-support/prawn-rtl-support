@@ -3,12 +3,35 @@
 module Prawn
   module Rtl
     module Connector
+      # Handles the logic for Arabic letter connection and contextual form selection.
+      #
+      # This module implements the core algorithm for determining which form
+      # (isolated, initial, medial, or final) an Arabic character should take
+      # based on its surrounding characters. It maintains a mapping of Arabic
+      # Unicode characters to their various contextual forms.
       module Logic
         @@charinfos = nil
 
+        # Represents information about an Arabic character and its contextual forms.
+        #
+        # Each Arabic letter can have up to four different forms depending on
+        # its position within a word and connection to surrounding letters.
         class CharacterInfo
-          attr_accessor :common, :formatted
+          # @return [String] the base Unicode character
+          attr_accessor :common
 
+          # @return [Hash] the character's forms (:isolated, :final, :initial, :medial)
+          attr_accessor :formatted
+
+          # Initializes a new CharacterInfo instance.
+          #
+          # @param common [String] the base Unicode character
+          # @param isolated [String] the isolated form of the character
+          # @param final [String] the final form of the character
+          # @param initial [String] the initial form of the character
+          # @param medial [String] the medial form of the character
+          # @param connects [Boolean] whether this character connects to the next
+          # @param diacritic [Boolean] whether this character is a diacritic mark
           def initialize(common, isolated, final, initial, medial, connects, diacritic)
             @common = common
             @formatted = {
@@ -21,20 +44,33 @@ module Prawn
             @diacritic = diacritic
           end
 
+          # Checks if this character connects to the following character.
+          #
+          # @return [Boolean] true if the character connects forward
           def connects?
             @connects
           end
 
+          # Checks if this character is a diacritic mark.
+          #
+          # @return [Boolean] true if the character is a diacritic
           def diacritic?
             @diacritic
           end
         end
 
-        # Determine the form of the current character (:isolated, :initial, :medial,
+        # Determines the contextual form of an Arabic character.
+        #
+        # Determines the form of the current character (:isolated, :initial, :medial,
         # or :final), given the previous character and the next one. In Arabic, all
         # characters can connect with a previous character, but not all letters can
-        # connect with the next character (this is determined by
-        # CharacterInfo#connects?).
+        # connect with the next character (this is determined by CharacterInfo#connects?).
+        #
+        # @param previous_previous_char [String, nil] the character two positions before
+        # @param previous_char [String, nil] the character immediately before
+        # @param next_char [String, nil] the character immediately after
+        # @param next_next_char [String, nil] the character two positions after
+        # @return [Symbol] the contextual form (:isolated, :initial, :medial, or :final)
         def self.determine_form(previous_previous_char, previous_char, next_char, next_next_char)
           charinfos = self.charinfos
           next_char = next_next_char if charinfos[next_char] && charinfos[next_char].diacritic?
@@ -52,6 +88,14 @@ module Prawn
           end
         end
 
+        # Transforms Arabic text by applying contextual letter forms.
+        #
+        # Processes a string character by character, determining the appropriate
+        # contextual form for each Arabic letter based on its surrounding characters.
+        # Non-Arabic characters pass through unchanged.
+        #
+        # @param str [String] the text to transform
+        # @return [String] the transformed text with Arabic letters in their contextual forms
         def self.transform(str)
           res = ''
           charinfos = self.charinfos
@@ -68,7 +112,7 @@ module Prawn
             next_next_char = char
             return unless current_char
 
-            if charinfos.keys.include?(current_char)
+            if charinfos.key?(current_char)
               form = determine_form(previous_previous_char, previous_char, next_char, next_next_char)
               res += charinfos[current_char].formatted[form]
             else
@@ -80,8 +124,13 @@ module Prawn
           res
         end
 
-        private
-
+        # Returns the character information mapping for Arabic characters.
+        #
+        # Lazily initializes and returns a hash mapping Arabic Unicode characters
+        # to their CharacterInfo objects containing contextual forms.
+        #
+        # @return [Hash{String => CharacterInfo}] the character information mapping
+        # @api private
         def self.charinfos
           return @@charinfos unless @@charinfos.nil?
 
@@ -135,6 +184,16 @@ module Prawn
           @@charinfos
         end
 
+        # Adds a character and its contextual forms to the character mapping.
+        #
+        # @param common [String] hex code of the base Unicode character
+        # @param isolated [String] hex code of the isolated form
+        # @param final [String] hex code of the final form
+        # @param initial [String] hex code of the initial form
+        # @param medial [String] hex code of the medial form
+        # @param connects [Boolean] whether this character connects to the next
+        # @param diacritic [Boolean] whether this character is a diacritic mark
+        # @api private
         def self.add(common, isolated, final, initial, medial, connects, diacritic = false)
           charinfo = CharacterInfo.new(
             [common.hex].pack('U'),
