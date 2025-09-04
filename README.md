@@ -6,7 +6,7 @@ This gem provide bidirectional text support for Prawn. It uses Unicode Bidirecti
 
 ## Motivation
 
-Ruby and Rails internally provide unicode string normalization and store normalized letters inside. But Prawn don't connect arabic glyphs back and don't suport mixet LTR and RTL string. This gem add this suport. 
+Ruby and Rails internally provide unicode string normalization and store normalized letters inside. But Prawn don't connect arabic glyphs back and don't support mixed LTR and RTL string. This gem add this support. 
 
 ## Installation
 
