@@ -1,15 +1,12 @@
 # Prawn::Rtl::Support
 
-[![Build Status](https://travis-ci.org/cropio/prawn-rtl-support.svg?branch=master)](https://travis-ci.org/cropio/prawn-rtl-support)
+[![Build Status](https://travis-ci.org/prawn-rtl-support/prawn-rtl-support.svg?branch=master)](https://travis-ci.org/prawn-rtl-support/prawn-rtl-support)
 
 This gem provide bidirectional text support for Prawn. It uses Unicode Bidirectional Algorithm for displaying text from [TwitterCldr::Shared::Bidi](https://github.com/twitter/twitter-cldr-rb) and connect arabic letters using [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector). Prawn patching is minimal, we patch only [`Prawn::Text::Formatted::Box#original_text`](https://github.com/prawnpdf/prawn/blob/master/lib/prawn/text/formatted/box.rb#L367). 
 
 ## Motivation
 
-Ruby and Rails internally provide unicode string normalization and store normalized letters inside. But Prawn don't connect arabic glyphs back and don't suport mixet LTR and RTL string. This gem add this suport. 
-
-## Acknowledgment
-This gem use same code as [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector) by [@staii](https://github.com/staii) and therefore based on [Arabic-Prawn](https://rubygems.org/gems/Arabic-Prawn/versions/0.0.1) by Dynamix Solutions (Ahmed Nasser).
+Ruby and Rails internally provide unicode string normalization and store normalized letters inside. But Prawn don't connect arabic glyphs back and don't support mixed LTR and RTL string. This gem add this support. 
 
 ## Installation
 
@@ -23,14 +20,19 @@ And that's all. Your Prawn is patched!
 
 Or install it yourself as:
 
-    $ gem install prawn-rtl-support
+```shell
+gem install prawn-rtl-support
+```
 
 ## Usage
 
-`prawn-rtl-support` provide method [`Prawn::Rtl::Connector#fix_rtl(string)`](https://github.com/cropio/prawn-rtl-support/blob/master/lib/prawn/rtl/connector.rb#L13) which reverse string and connect arabic letters.
+`prawn-rtl-support` provide method [`Prawn::Rtl::Connector#fix_rtl(string)`](https://github.com/prawn-rtl-support/prawn-rtl-support/blob/master/lib/prawn/rtl/connector.rb#L13) which reverse string and connect arabic letters.
+
 Prawn patching is minimal, we patch only [`Prawn::Text::Formatted::Box#original_text`](https://github.com/prawnpdf/prawn/blob/master/lib/prawn/text/formatted/box.rb#L367).
 
 ## Development
+
+Check [CLAUDE.md](CLAUDE.md) for more details about the architecture and development commands.
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
@@ -38,9 +40,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/cropio/prawn-rtl-support. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/prawn-rtl-support/prawn-rtl-support. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-
+## Acknowledgment
+This gem uses the same code as [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector) by [@staii](https://github.com/staii) and therefore is based on [Arabic-Prawn](https://rubygems.org/gems/Arabic-Prawn/versions/0.0.1) by Dynamix Solutions (Ahmed Nasser).
 
 ## License
 

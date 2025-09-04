@@ -50,3 +50,7 @@ The gem automatically activates when required - no configuration needed. It dete
 
 - **prawn ~> 2.2**: The PDF generation library being patched
 - **twitter_cldr >= 4.0, < 7.0**: Provides Unicode Bidirectional Algorithm implementation
+
+## Contributing
+
+- Run tests `bundle exec rake` and RuboCop linting `bundle exec rubocop` before committing.
