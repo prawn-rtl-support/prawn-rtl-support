@@ -27,7 +27,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'rubocop', '1.80.2'
   spec.add_development_dependency 'rubocop-performance', '1.25.0'
+  spec.add_development_dependency 'rubocop-rake', '0.7.1'
   spec.add_development_dependency 'rubocop-rspec', '3.7.0'
+  spec.add_development_dependency 'rubocop-rubycw', '0.2.2'
+  spec.add_development_dependency 'rubocop-thread_safety', '0.7.3'
 
   spec.add_dependency 'prawn', '~> 2.2'
   spec.add_dependency 'twitter_cldr', '>= 4.0', '< 7.0'
