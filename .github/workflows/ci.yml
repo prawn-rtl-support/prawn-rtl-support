@@ -23,10 +23,11 @@ jobs:
       run: bundle exec rubocop
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-22.04, ubuntu-24.04, ubuntu-22.04-arm, ubuntu-24.04-arm]
         ruby-version: ['2.7', '3.0', '3.1', '3.2', '3.3', '3.4']
 
     steps:

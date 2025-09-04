@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'connector/logic'
-require 'twitter_cldr'
+require_relative 'bidi'
 
 module Prawn
   module Rtl
@@ -49,16 +49,13 @@ module Prawn
 
       # Reorders text according to the Unicode Bidirectional Algorithm.
       #
-      # Uses TwitterCldr's Bidi implementation to visually reorder mixed
+      # Uses ICU's BiDi implementation via FFI to visually reorder mixed
       # LTR/RTL text for correct display.
       #
       # @param string [String] the text to reorder
       # @return [String] the visually reordered text
       def self.reorder(string)
-        TwitterCldr::Shared::Bidi
-          .from_string(string, direction: :RTL)
-          .reorder_visually!
-          .to_s
+        Bidi.reorder(string, direction: :rtl)
       end
 
       # Checks if a string contains RTL (Right-to-Left) characters.
@@ -66,10 +63,7 @@ module Prawn
       # @param string [String] the text to check
       # @return [Boolean] true if the text contains RTL characters, false otherwise
       def self.include_rtl?(string)
-        TwitterCldr::Shared::Bidi
-          .from_string(string)
-          .types
-          .include?(:R)
+        Bidi.contains_rtl?(string)
       end
     end
   end
