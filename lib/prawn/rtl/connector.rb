@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'prawn/rtl/connector/logic'
+require_relative 'connector/logic'
 require 'twitter_cldr'
 
 module Prawn
@@ -8,12 +8,21 @@ module Prawn
     # Provides bidirectional text support and Arabic letter connection for Prawn PDF generation.
     #
     # This module handles RTL (Right-to-Left) text processing by:
-    # - Connecting Arabic letters according to their contextual forms
+    # - Connecting Arabic script letters according to their contextual forms
     # - Reordering text using the Unicode Bidirectional Algorithm
-    # - Detecting RTL text presence
+    # - Supporting multiple RTL languages (Arabic, Hebrew, Persian, Urdu, etc.)
+    # - Handling mixed LTR/RTL text properly
     #
-    # @example Fix RTL text for PDF rendering
+    # @example Fix Arabic text for PDF rendering
     #   text = "مرحبا بالعالم"
+    #   fixed_text = Prawn::Rtl::Connector.fix_rtl(text)
+    #
+    # @example Fix Hebrew text for PDF rendering
+    #   text = "שלום עולם"
+    #   fixed_text = Prawn::Rtl::Connector.fix_rtl(text)
+    #
+    # @example Fix mixed LTR/RTL text
+    #   text = "Hello مرحبا World"
     #   fixed_text = Prawn::Rtl::Connector.fix_rtl(text)
     module Connector
       # Connects Arabic letters according to their contextual forms.

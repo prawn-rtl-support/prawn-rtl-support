@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'pdf/core/text'
-require 'prawn/rtl/support/version'
-require 'prawn/rtl/connector'
+require_relative 'support/version'
+require_relative 'connector'
 
 module Prawn
   module Rtl
