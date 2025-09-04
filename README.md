@@ -1,6 +1,6 @@
 # Prawn::Rtl::Support
 
-[![Build Status](https://travis-ci.org/prawn-rtl-support/prawn-rtl-support.svg?branch=master)](https://travis-ci.org/prawn-rtl-support/prawn-rtl-support)
+[![CI](https://github.com/prawn-rtl-support/prawn-rtl-support/actions/workflows/ci.yml/badge.svg)](https://github.com/prawn-rtl-support/prawn-rtl-support/actions/workflows/ci.yml)
 
 This gem provide bidirectional text support for Prawn. It uses Unicode Bidirectional Algorithm for displaying text from [TwitterCldr::Shared::Bidi](https://github.com/twitter/twitter-cldr-rb) and connect arabic letters using [Arabic Letter Connector](https://github.com/staii/arabic-letter-connector). Prawn patching is minimal, we patch only [`Prawn::Text::Formatted::Box#original_text`](https://github.com/prawnpdf/prawn/blob/master/lib/prawn/text/formatted/box.rb#L367). 
 
