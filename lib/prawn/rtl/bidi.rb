@@ -41,6 +41,7 @@ module Prawn
           else
             [
               '/usr/local/{lib64,lib}',
+              '/usr/local/opt/icu4c/{lib64,lib}',
               '/opt/local/{lib64,lib}',
               '/opt/homebrew/{lib64,lib}',
               '/usr/{lib64,lib}'
